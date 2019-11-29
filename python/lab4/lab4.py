@@ -125,7 +125,7 @@ print(equal)
 #29. Сделать массив неизменяемым
 Z = np.zeros(10)
 Z.flags.writeable = False
-Z[0] = 1
+#Z[0] = 1
 
 #30. Дан массив 10x2 (точки в декартовой системе координат), преобразовать в полярную
 Z = np.random.random((10,2))
@@ -163,7 +163,7 @@ for dtype in [np.float32, np.float64]:
  print(np.finfo(dtype).eps)
 
 #35. Напечатать все значения в массиве
-np.set_printoptions(threshold=np.nan)
+#np.set_printoptions(threshold=np.nan)
 Z = np.zeros((25,25))
 print(Z)
 
@@ -196,7 +196,7 @@ Z = Z.astype(np.float32, copy=False)
 #6,,,7,8
 #,,9,10,11
 #Как прочитать его?
-Z = np.genfromtxt("missing.dat", delimiter=",")
+#Z = np.genfromtxt("missing.dat", delimiter=",")
 
 #41. Каков эквивалент функции enumerate для numpy массивов?
 Z = np.arange(9).reshape(3,3)
@@ -368,16 +368,13 @@ print(C)
 #63. Создать подкласс симметричных 2D массивов (Z[i,j] == Z[j,i])
 # Note: only works for 2d array and value setting using indices
 class Symetric(np.ndarray):
- def __setitem__(self, (i,j), value):
- super(Symetric, self).__setitem__((i,j), value)
- super(Symetric, self).__setitem__((j,i), value)
-def symetric(Z):
- return np.asarray(Z + Z.T - np.diag(Z.diagonal())).view(Symetric)
-S = symetric(np.random.randint(0,10,(5,5)))
+ def symetric(Z):
+  return np.asarray(Z + Z.T - np.diag(Z.diagonal())).view(Symetric)
+S = Symetric(np.random.randint(0,10,(5,5)))
 S[2,3] = 42
 print(S)
 
-#64. Рассмотрим множество матриц (n,n) и множество из p векторов (n,1). Посчитать сумму
+#64. Рассмотрим множество матриц (n,n) и множество из p векторов (n,1). Посчитать суммуd
 #p произведений матриц (результат имеет размерность (n,1))
 p, n = 10, 20
 M = np.ones((p,n,n))
@@ -426,7 +423,7 @@ def cartesian(arrays):
  ix = np.indices(shape, dtype=int)
  ix = ix.reshape(len(arrays), -1).T
  for n, arr in enumerate(arrays):
- ix[:, n] = arrays[n][ix[:, n]]
+  ix[:, n] = arrays[n][ix[:, n]]
  return ix
 print(cartesian(([1, 2, 3], [4, 5], [6, 7])))
 
